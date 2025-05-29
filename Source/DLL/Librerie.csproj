@@ -7,8 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Platforms>AnyCPU;x86</Platforms>
 	<Configurations>Debug;Release</Configurations>
-	<BaseOutputPath>K:\ScreeningMediatori\bin\</BaseOutputPath>
-	<SonarQubeExclude>true</SonarQubeExclude>
+	<BaseOutputPath>..\..\bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
