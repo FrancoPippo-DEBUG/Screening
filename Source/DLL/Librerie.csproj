@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x86</Platforms>
+	<Configurations>Debug;Release</Configurations>
+	<BaseOutputPath>K:\ScreeningMediatori\bin\</BaseOutputPath>
+	<SonarQubeExclude>true</SonarQubeExclude>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PDFsharp-WPF" Version="6.1.1" />
+    <PackageReference Include="Selenium.Support" Version="4.29.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.29.0" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="System.Data.Odbc" Version="9.0.3" />
+    <PackageReference Include="System.Data.OleDb" Version="9.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
+  </ItemGroup>
+
+</Project>
