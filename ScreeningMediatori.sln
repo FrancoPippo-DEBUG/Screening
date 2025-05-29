@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompassOAM", "Source\Compas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompassRUI", "Source\CompassRUI\CompassRUI.csproj", "{40A78C60-330E-40C3-A3D2-F6633D9F5E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Librerie", "Source\Librerie\Librerie.csproj", "{D154BFA2-8C98-420C-AC16-09E3577B2D22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Librerie", "Source\DLL\Librerie.csproj", "{D154BFA2-8C98-420C-AC16-09E3577B2D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
