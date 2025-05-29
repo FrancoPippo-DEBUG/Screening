@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using PdfSharp.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Avvera
@@ -75,36 +76,7 @@ namespace Avvera
 
                     string denominazione = riga_letta[0].ToUpper();
                     string cognome = string.Empty; string nome = string.Empty;
-                    foreach (char c in denominazione)
-                    {
-                        switch ((int)c)
-                        {
-                            case int x when x == 193 ||
-                                            x == 192:
-                                denominazione = RimpiazzaAccenti(denominazione, "A", x);
-                                break;
-
-                            case int x when x == 200 ||
-                                            x == 201:
-                                denominazione = RimpiazzaAccenti(denominazione, "E", x);
-                                break;
-
-                            case int x when x == 204 ||
-                                            x == 205:
-                                denominazione = RimpiazzaAccenti(denominazione, "I", x);
-                                break;
-
-                            case int x when x == 210 ||
-                                            x == 211:
-                                denominazione = RimpiazzaAccenti(denominazione, "O", x);
-                                break;
-
-                            case int x when x == 217 ||
-                                            x == 218:
-                                denominazione = RimpiazzaAccenti(denominazione, "U", x);
-                                break;
-                        }
-                    }
+                    denominazione = RimpiazzaAccenti(denominazione);
 
                     string codice_fiscale = riga_letta[1];
                     if (codice_fiscale.Length > 11)
@@ -837,9 +809,24 @@ namespace Avvera
                 win.Chiudi();
             }
         }
-        private static string RimpiazzaAccenti(string denominazione, string lettera, int ascii)
+        private static string RimpiazzaAccenti(string denominazione)
         {
-            return denominazione.Replace(Encoding.Default.GetString(new byte[] { (byte)ascii }), lettera + "'");
+            var mappaAccenti = new Dictionary<int, string>
+            {
+                {192, "A"}, {193, "A"},
+                {200, "E"}, {201, "E"},
+                {204, "I"}, {205, "I"},
+                {210, "O"}, {211, "O"},
+                {217, "U"}, {218, "U"}
+            };
+            foreach (char c in denominazione)
+            {
+                if (mappaAccenti.TryGetValue(c, out string lettera))
+                {
+                    return denominazione.Replace(Encoding.Default.GetString(new byte[] { (byte)c }), lettera + "'");
+                }
+            }
+            return denominazione;
         }
         private static void ScriviSede(SedeInfo sede, bool addExtraSpacing = false)
         {
