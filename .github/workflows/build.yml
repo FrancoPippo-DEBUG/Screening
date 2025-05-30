@@ -49,15 +49,19 @@ jobs:
             /o:"se-b-i" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="coverage.opencover.xml" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
             /d:sonar.scanner.scanAll=false
           dotnet build > $null          
       - name: Coverage Collect
         run : |
-          dotnet-coverage collect -f opencover -o "coverage.opencover.xml" -- dotnet test
+          # dotnet-coverage collect -f opencover -o "coverage.opencover.xml" -- dotnet test
+          dotnet test --no-build --verbosity normal `
+            /p:CollectCoverage=true `
+            /p:CoverletOutputFormat=opencover `
+            /p:CoverletOutput=coverage.opencover.xml
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: coverage.xml
+          path: coverage.opencover.xml
