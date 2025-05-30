@@ -44,9 +44,17 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"FrancoPippo-DEBUG_Screening" /o:"se-b-i" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=**\coverage.xml /d:sonar.scanner.scanAll=false
-          dotnet build > $null
-          dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
+          .\.sonar\scanner\dotnet-sonarscanner begin `
+            /k:"FrancoPippo-DEBUG_Screening" `
+            /o:"se-b-i" `
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+            /d:sonar.host.url="https://sonarcloud.io" `
+            /d:sonar.cs.vscoveragexml.reportsPaths="**/coverage.xml" `
+            /d:sonar.scanner.scanAll=false
+          dotnet build > $null          
+      - name: Coverage Collect
+        run : |
+          dotnet-coverage collect -f opencover -o "coverage.xml" -- dotnet test
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v4
