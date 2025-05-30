@@ -603,11 +603,11 @@ namespace DLL
             {
                 ret += c switch
                 {
-                    '¿' or '¡' => "A",
-                    '»' or '…' => "B",
-                    'Ã' => "I",
-                    '“' => "O",
-                    'Ÿ' => "U",
+                    '√Ä' or '√Å' => "A",
+                    '√à' or '√â' => "B",
+                    '√å' => "I",
+                    '√í' => "O",
+                    '√ô' => "U",
                     _ => c.ToString()
                 };
             }
@@ -795,7 +795,7 @@ namespace DLL
         /// <summary>
         /// Scrive una riga sul file excel aperto
         /// </summary>
-        /// <param name="cosa_scrivere">Riga che andr‡ a scrivere</param>
+        /// <param name="cosa_scrivere">Riga che andr√† a scrivere</param>
         /// <param name="riga">Indice riga in base 1</param>
         /// <param name="ini_col">Indice colonna in base 1</param>
         /// <param name="indice_foglio">Indice foglio in base 1</param>
@@ -850,7 +850,7 @@ namespace DLL
         /// <summary>
         /// Scrive un range di righe sul file excel aperto
         /// </summary>
-        /// <param name="cosa_scrivere">Range di righe che andr‡ a scrivere</param>
+        /// <param name="cosa_scrivere">Range di righe che andr√† a scrivere</param>
         /// <param name="riga">Indice riga in base 1</param>
         /// <param name="ini_col">Indice colonna in base 1</param>
         /// <param name="indice_foglio">Indice foglio in base 1</param>
@@ -935,10 +935,10 @@ namespace DLL
                 {
                     if (!overwrite)
                     {
-                        MessageBoxResult ret = MsgBox.Show("Il file " + filename + " esiste gi‡. Sostituire?", "Sovrascrivere?", MessageBoxImage.Warning, MessageBoxButton.YesNo);
+                        MessageBoxResult ret = MsgBox.Show("Il file " + filename + " esiste gi√†. Sostituire?", "Sovrascrivere?", MessageBoxImage.Warning, MessageBoxButton.YesNo);
                         if (ret == MessageBoxResult.No)
                         {
-                            throw new Exception("Il file " + filename + " esiste gi‡. Impossibile continuare");
+                            throw new Exception("Il file " + filename + " esiste gi√†. Impossibile continuare");
                         }
                     }
                     File.Delete(filename);
@@ -955,9 +955,9 @@ namespace DLL
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("esiste gi‡"))
+                if (ex.Message.Contains("esiste gi√†"))
                 {
-                    throw new Exception("Il file " + filename + " esiste gi‡. Impossibile continuare");
+                    throw new Exception("Il file " + filename + " esiste gi√†. Impossibile continuare");
                 }
                 return false;
             }
@@ -1486,8 +1486,8 @@ namespace DLL
                 sourceFile = Directory.GetFiles(sourcePath, "*.*");
                 if (sourceFile.Length > 1)
                 {
-                    MsgBox.Show("Attenzione! Pi˘ di un file in C:\\A\\, eliminare tutti i file prima di continuare");
-                    throw new Exception("Attenzione ! Pi˘ di un file in C:\\A\\");
+                    MsgBox.Show("Attenzione! Pi√π di un file in C:\\A\\, eliminare tutti i file prima di continuare");
+                    throw new Exception("Attenzione ! Pi√π di un file in C:\\A\\");
                 }
                 return -3;
             }
@@ -1555,12 +1555,12 @@ namespace DLL
                         Thread.Sleep(2000);
                         if (!File.Exists(destPath + titolo_file))
                         {
-                            MsgBox.Show("C'Ë qualcosa che non va, file " + titolo_file + " non spostato in " + destPath + ", contattare reparto tecnico");
+                            MsgBox.Show("C'√® qualcosa che non va, file " + titolo_file + " non spostato in " + destPath + ", contattare reparto tecnico");
                             Environment.Exit(1);
                         }
                         if (File.Exists(sourceFile[0]))
                         {
-                            MsgBox.Show("C'Ë qualcosa che non va, file " + sourceFile[0] + " ancora in cartella , contattare reparto tecnico");
+                            MsgBox.Show("C'√® qualcosa che non va, file " + sourceFile[0] + " ancora in cartella , contattare reparto tecnico");
                             Environment.Exit(1);
                         }
                         return 0;
@@ -1572,7 +1572,7 @@ namespace DLL
                             File.Delete(sourceFile[0]);
                             return -2;
                         }
-                        else if (ex.Message.Contains("non Ë stato trovato"))
+                        else if (ex.Message.Contains("non √® stato trovato"))
                         {
                             Thread.Sleep(1000);
                             sourceFile = Directory.GetFiles(sourcePath, "*" + formato_file);
@@ -1591,7 +1591,7 @@ namespace DLL
                                 break;
                             }
                         }
-                        //err.GestiscoErr(sourceFile[0] + " non spostato perchË gi‡ presente in " + destPath + " - CONSULTA ERROR.LOG", 3, ex);
+                        //err.GestiscoErr(sourceFile[0] + " non spostato perch√® gi√† presente in " + destPath + " - CONSULTA ERROR.LOG", 3, ex);
                         //File.Delete(sourceFile[0]);
                     }
                 }
@@ -2329,7 +2329,7 @@ namespace DLL
         /// <summary>
         /// Crea documento PDF
         /// </summary>
-        /// <param name="percorso"> Se percorso = null user‡ come percorso AppData\Local\Temp  </param>
+        /// <param name="percorso"> Se percorso = null user√† come percorso AppData\Local\Temp  </param>
         public PDF(string percorso = null)
         {
             percorso = percorso == null ? documentsPath : percorso;
@@ -3643,7 +3643,7 @@ namespace DLL
 
                     IWebElement elem = li.FindElement(By.XPath(".//span"));
 
-                    if (descr.Contains("Prodotti e Attivit‡"))
+                    if (descr.Contains("Prodotti e Attivit√†"))
                     {
                         new_result.Add(intermed);
                         intermed = new Dictionary<string, string>();
