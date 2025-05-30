@@ -37,8 +37,8 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Install dotnet-coverage
-        run: dotnet tool install --global dotnet-coverage
+    #  - name: Install dotnet-coverage
+    #    run: dotnet tool install --global dotnet-coverage
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -49,12 +49,11 @@ jobs:
             /o:"se-b-i" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
+            /d:sonar.cs.opencover.reportsPaths="coverage.opencover.xml" `
             /d:sonar.scanner.scanAll=false
           dotnet build > $null          
       - name: Coverage Collect
         run : |
-          # dotnet-coverage collect -f opencover -o "coverage.opencover.xml" -- dotnet test
           dotnet test --no-build --verbosity normal `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=opencover `
