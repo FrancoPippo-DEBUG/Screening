@@ -54,10 +54,7 @@ jobs:
           dotnet build > $null          
       - name: Coverage Collect
         run : |
-          dotnet test --no-build --verbosity normal `
-            /p:CollectCoverage=true `
-            /p:CoverletOutputFormat=opencover `
-            /p:CoverletOutput=coverage.opencover.xml
+          dotnet-coverage collect "dotnet test" -f xml -o "coverage.opencover.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v4
